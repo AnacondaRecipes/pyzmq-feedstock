@@ -51,6 +51,12 @@ about:
   home: https://github.com/zeromq/pyzmq
   summary: Python bindings for zeromq
   license: BSD 3-clause
+  description: |
+    PyZMQ contains Python bindings for 0MQ. 0MQ is a lightweight and fast
+    messaging implementation.
+  doc_url: https://pyzmq.readthedocs.org/
+  doc_source_url: https://github.com/zeromq/pyzmq/blob/master/docs/source/index.rst
+  dev_url: https://github.com/zeromq/pyzmq
 
 extra:
   recipe-maintainers:
