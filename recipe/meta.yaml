@@ -19,7 +19,7 @@ build:
 # but don't include one for VS 2008, which we would need for Python 2.7.
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
     - pkg-config  # [not win]
     - python
     - pip
