@@ -50,8 +50,8 @@ test:
   #         swap-space (maybe just extend the try: to cover the whole thing?)
   #         or else add a --have-large-mem arg:
   #         https://docs.pytest.org/en/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option
-  # commands:                # [not win]
-  #   - py.test --pyargs zmq.tests.test_socket  # [not win]
+  commands:                # [not win]
+    - py.test --pyargs zmq.tests.test_socket  # [not win]
 
 about:
   home: https://github.com/zeromq/pyzmq
