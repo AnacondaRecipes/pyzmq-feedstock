@@ -25,11 +25,10 @@ requirements:
     - pkg-config  # [not win]
     - python
     - pip
-    - zeromq >=4.2.5,<4.3
+    - zeromq
     - libsodium
   run:
     - python
-    - zeromq >=4.2.5,<4.3
     - libsodium
 
 test:
