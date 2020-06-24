@@ -1,15 +1,17 @@
-build_number_decrement:
-- '1000'
 c_compiler:
-- toolchain_c
+- gcc
+c_compiler_version:
+- '8'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- toolchain_cxx
+- gxx
+cxx_compiler_version:
+- '8'
 docker_image:
-- condaforge/linux-anvil
+- condaforge/linux-anvil-ppc64le
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -17,13 +19,11 @@ pin_run_as_build:
   zeromq:
     max_pin: x.x
 python:
-- '2.7'
+- 3.7.* *_cpython
+python_impl:
+- cpython
 zeromq:
-- '>=4.2.5,<4.3'
+- 4.3.2
 zip_keys:
-- - c_compiler
-  - cxx_compiler
-  - channel_sources
-  - channel_targets
-  - docker_image
-  - build_number_decrement
+- - python
+  - python_impl

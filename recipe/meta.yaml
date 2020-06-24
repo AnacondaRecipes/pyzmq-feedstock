@@ -1,4 +1,4 @@
-{% set version = "18.1.1" %}
+{% set version = "19.0.1" %}
 
 package:
   name: pyzmq
@@ -7,7 +7,7 @@ package:
 source:
   # We use the pypi URL as it includes the prepared Cython files.
   url: https://pypi.io/packages/source/p/pyzmq/pyzmq-{{ version }}.tar.gz
-  sha256: 8c69a6cbfa94da29a34f6b16193e7c15f5d3220cb772d6d17425ff3faa063a6d
+  sha256: 13a5638ab24d628a6ade8f794195e1a1acd573496c3b85af2f1183603b7bf5e0
 
 build:
   number: 0
@@ -26,8 +26,11 @@ requirements:
     - python
     - pip
     - zeromq
+    - libsodium
   run:
     - python
+    - zeromq
+    - libsodium
 
 test:
   imports:
@@ -42,14 +45,7 @@ test:
   # We run the zmq tests on all platforms except Windows.
   # The only reason not to run the tests on Windows is that
   # they terminate with an interactive prompt. See also
-  # https://github.com/conda-forge/staged-recipes/pull/292#issuecomment-208080893
-  #
-  # Further: You need a lot of swap space (>=4GB probably) to run test_large_send
-  # TODO :: Add code to test_large_send to disable it when there is not enough
-  #         swap-space (maybe just extend the try: to cover the whole thing?)
-  #         or else add a --have-large-mem arg:
-  #         https://docs.pytest.org/en/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option
-  #
+  # https://github.com/conda-forge/staged-recipes/pull/292#issuecomment-208080893.
   commands:
     - py.test --pyargs zmq.tests.test_socket
 
@@ -57,6 +53,7 @@ about:
   home: https://github.com/zeromq/pyzmq
   summary: Python bindings for zeromq
   license: BSD 3-clause
+  license_file: COPYING.BSD
   license_family: BSD
   description: |
     PyZMQ contains Python bindings for 0MQ. 0MQ is a lightweight and fast
@@ -68,10 +65,11 @@ about:
 extra:
   recipe-maintainers:
     - jakirkham
-    - JohanMabille
-    - mingwandroid
     - minrk
     - msarahan
-    - ocefpaf
     - pelson
     - SylvainCorlay
+    - JohanMabille
+    - ocefpaf
+    - mingwandroid
+    - chenghlee
