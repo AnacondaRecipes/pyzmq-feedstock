@@ -10,7 +10,11 @@ source:
   sha256: 13a5638ab24d628a6ade8f794195e1a1acd573496c3b85af2f1183603b7bf5e0
 
 build:
-  number: 0
+  number: 1
+  ignore_run_exports:
+    - libsodium
+    - libcxx          # [osx]
+    - libstdcxx-ng    # [linux]
 
 # On Windows ZeroMQ is bundled with pyzmq.
 # On Windows pyzmq includes tweetnacl so libsodium is not used.
@@ -26,11 +30,9 @@ requirements:
     - python
     - pip
     - zeromq
-    - libsodium
   run:
     - python
     - zeromq
-    - libsodium
 
 test:
   imports:
