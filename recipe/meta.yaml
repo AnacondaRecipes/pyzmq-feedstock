@@ -15,6 +15,10 @@ build:
     - libsodium
     - libcxx          # [osx]
     - libstdcxx-ng    # [linux]
+  missing_dso_whitelist:            # [win]
+    - $RPATH/libzmq.cp*-win32.pyd   # [win]
+    - $RPATH/libzmq.cp*-win_amd64.pyd   #[win]
+
 
 # On Windows ZeroMQ is bundled with pyzmq.
 # On Windows pyzmq includes tweetnacl so libsodium is not used.
