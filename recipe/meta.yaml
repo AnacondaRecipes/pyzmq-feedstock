@@ -11,12 +11,14 @@ source:
 
 build:
   number: 1
+  rpaths:
+    - lib/R/lib
   ignore_run_exports:
     - libsodium
     - libcxx          # [osx]
     - libstdcxx-ng    # [linux]
     - zeromq          # [win]
-   missing_dso_whitelist:            # [win]
+  missing_dso_whitelist:            # [win]
     - $RPATH/libzmq.cp36-win32.pyd   # [win]
 
 # On Windows ZeroMQ is bundled with pyzmq.
