@@ -15,6 +15,7 @@ build:
     - libsodium
     - libcxx          # [osx]
     - libstdcxx-ng    # [linux]
+    - zeromq          # [win]
 
 # On Windows ZeroMQ is bundled with pyzmq.
 # On Windows pyzmq includes tweetnacl so libsodium is not used.
