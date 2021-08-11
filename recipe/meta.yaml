@@ -1,4 +1,4 @@
-{% set version = "20.0.0" %}
+{% set version = "22.2.1" %}
 
 package:
   name: pyzmq
@@ -7,7 +7,7 @@ package:
 source:
   # We use the pypi URL as it includes the prepared Cython files.
   url: https://pypi.io/packages/source/p/pyzmq/pyzmq-{{ version }}.tar.gz
-  sha256: 824ad5888331aadeac772bce27e1c2fbcab82fade92edbd234542c4e12f0dca9
+  sha256: 6d18c76676771fd891ca8e0e68da0bbfb88e30129835c0ade748016adb3b6242
 
 build:
   number: 1
@@ -15,6 +15,10 @@ build:
     - libsodium
     - libcxx          # [osx]
     - libstdcxx-ng    # [linux]
+  missing_dso_whitelist:            # [win]
+    - $RPATH/libzmq.cp*-win32.pyd   # [win]
+    - $RPATH/libzmq.cp*-win_amd64.pyd   #[win]
+
 
 # On Windows ZeroMQ is bundled with pyzmq.
 # On Windows pyzmq includes tweetnacl so libsodium is not used.
@@ -29,10 +33,10 @@ requirements:
   host:
     - python
     - pip
-    - zeromq
+    - zeromq  #[not win]
   run:
     - python
-    - zeromq
+    - zeromq  #[not win]
 
 test:
   imports:
