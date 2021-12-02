@@ -1,4 +1,4 @@
-{% set version = "22.2.1" %}
+{% set version = "22.3.0" %}
 
 package:
   name: pyzmq
@@ -7,10 +7,11 @@ package:
 source:
   # We use the pypi URL as it includes the prepared Cython files.
   url: https://pypi.io/packages/source/p/pyzmq/pyzmq-{{ version }}.tar.gz
-  sha256: 6d18c76676771fd891ca8e0e68da0bbfb88e30129835c0ade748016adb3b6242
+  sha256: 8eddc033e716f8c91c6a2112f0a8ebc5e00532b4a6ae1eb0ccc48e027f9c671c
 
 build:
-  number: 1
+  number: 0
+  skip: True  # [py<36]
   ignore_run_exports:
     - libsodium
     - libcxx          # [osx]
@@ -18,7 +19,6 @@ build:
   missing_dso_whitelist:            # [win]
     - $RPATH/libzmq.cp*-win32.pyd   # [win]
     - $RPATH/libzmq.cp*-win_amd64.pyd   #[win]
-
 
 # On Windows ZeroMQ is bundled with pyzmq.
 # On Windows pyzmq includes tweetnacl so libsodium is not used.
@@ -32,11 +32,15 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
+    - cython >=0.29
+    - packaging
     - pip
-    - zeromq  #[not win]
+    - setuptools
+    - wheel
+    - zeromq  # [not win]
   run:
     - python
-    - zeromq  #[not win]
+    - zeromq  # [not win]
 
 test:
   imports:
@@ -58,7 +62,7 @@ test:
 about:
   home: https://github.com/zeromq/pyzmq
   summary: Python bindings for zeromq
-  license: BSD 3-clause
+  license: BSD-3-clause
   license_file: COPYING.BSD
   license_family: BSD
   description: |
