@@ -12,19 +12,7 @@ source:
 build:
   number: 0
   skip: True  # [py<36]
-  ignore_run_exports:
-    - libsodium
-    - libcxx          # [osx]
-    - libstdcxx-ng    # [linux]
-  missing_dso_whitelist:               # [win]
-    - $RPATH/libzmq.cp*-win32.pyd      # [win]
-    - $RPATH/libzmq.cp*-win_amd64.pyd  # [win]
 
-# On Windows ZeroMQ is bundled with pyzmq.
-# On Windows pyzmq includes tweetnacl so libsodium is not used.
-# We should revisit these in the future. However, packaging libsodium
-# on Windows is complicated by the fact that they ship project files,
-# but don't include one for VS 2008, which we would need for Python 2.7.
 requirements:
   build:
     - pkg-config  # [not win]
