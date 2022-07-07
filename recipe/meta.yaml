@@ -13,7 +13,7 @@ build:
   number: 0
   skip: True  # [py<36]
   missing_dso_whitelist:
-    - $RPATH/libzmq.cp39-win_amd64.pyd  # [win]
+    - $RPATH/libzmq.cp*-win_amd64.pyd  # [win]
 
 requirements:
   build:
