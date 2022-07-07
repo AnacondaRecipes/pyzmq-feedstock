@@ -26,11 +26,9 @@ requirements:
     - setuptools
     - wheel
     - zeromq
-    - libsodium
   run:
     - python
     - zeromq
-    - libsodium
 
 test:
   imports:
