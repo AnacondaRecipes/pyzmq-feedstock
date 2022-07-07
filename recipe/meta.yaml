@@ -27,7 +27,7 @@ build:
 # but don't include one for VS 2008, which we would need for Python 2.7.
 requirements:
   build:
-    - pkg-config  # [not win]
+    - pkg-config
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
