@@ -7,4 +7,6 @@ if [ "$(uname)" == "Darwin" ]; then
     echo "skip_check_zmq = True" >> setup.cfg
 fi
 
-"${PYTHON}" -m pip install . --install-option="--zmq=${PREFIX}"
+export ZMQ_PREFIX=$PREFIX
+
+"${PYTHON}" -m pip install .

@@ -1,4 +1,4 @@
-{% set version = "22.3.0" %}
+{% set version = "23.2.0" %}
 
 package:
   name: pyzmq
@@ -7,24 +7,16 @@ package:
 source:
   # We use the pypi URL as it includes the prepared Cython files.
   url: https://pypi.io/packages/source/p/pyzmq/pyzmq-{{ version }}.tar.gz
-  sha256: 8eddc033e716f8c91c6a2112f0a8ebc5e00532b4a6ae1eb0ccc48e027f9c671c
+  sha256: a51f12a8719aad9dcfb55d456022f16b90abc8dde7d3ca93ce3120b40e3fa169
 
 build:
-  number: 2
+  number: 0
   skip: True  # [py<36]
   ignore_run_exports:
-    - libsodium
-    - libcxx          # [osx]
-    - libstdcxx-ng    # [linux]
-  missing_dso_whitelist:            # [win]
-    - $RPATH/libzmq.cp*-win32.pyd   # [win]
-    - $RPATH/libzmq.cp*-win_amd64.pyd   #[win]
+    - zeromq  # [win]
+  missing_dso_whitelist:
+    - $RPATH/libzmq.cp*-win_amd64.pyd  # [win]
 
-# On Windows ZeroMQ is bundled with pyzmq.
-# On Windows pyzmq includes tweetnacl so libsodium is not used.
-# We should revisit these in the future. However, packaging libsodium
-# on Windows is complicated by the fact that they ship project files,
-# but don't include one for VS 2008, which we would need for Python 2.7.
 requirements:
   build:
     - pkg-config  # [not win]
@@ -37,10 +29,10 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - zeromq  # [not win]
+    - zeromq
   run:
     - python
-    - zeromq  # [not win]
+    - zeromq
 
 test:
   imports:
@@ -48,10 +40,8 @@ test:
     - zmq.backend.cython.socket
     - zmq.backend.cython.utils
     - zmq.devices.monitoredqueue
-
   requires:
     - pytest
-
   # We run the zmq tests on all platforms except Windows.
   # The only reason not to run the tests on Windows is that
   # they terminate with an interactive prompt. See also
@@ -62,7 +52,7 @@ test:
 about:
   home: https://github.com/zeromq/pyzmq
   summary: Python bindings for zeromq
-  license: BSD-3-clause
+  license: BSD-3-Clause AND LGPL-3.0-or-later
   license_file: COPYING.BSD
   license_family: BSD
   description: |
