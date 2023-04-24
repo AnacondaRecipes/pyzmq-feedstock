@@ -19,7 +19,7 @@ build:
 
 requirements:
   build:
-    - pkg-config  # [not win]
+    - pkg-config =0.29.2  # [not win]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -27,8 +27,9 @@ requirements:
     - packaging
     - pip
     - setuptools
-    - libsodium
-    - zeromq
+    - wheel
+    - libsodium =1.0.18
+    - zeromq =4.3.4
   run:
     - python
     - libsodium
@@ -62,7 +63,6 @@ about:
   description: |
     PyZMQ contains Python bindings for 0MQ. 0MQ is a lightweight and fast
     messaging implementation.
-  doc_url: https://pyzmq.readthedocs.org/
   doc_source_url: https://github.com/zeromq/pyzmq/blob/master/docs/source/index.rst
   dev_url: https://github.com/zeromq/pyzmq
 

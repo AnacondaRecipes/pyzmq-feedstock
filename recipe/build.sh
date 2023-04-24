@@ -9,4 +9,4 @@ fi
 
 export ZMQ_PREFIX=$PREFIX
 
-"${PYTHON}" -m pip install .
+"${PYTHON}" -m pip install --no-deps --no-build-isolation .
