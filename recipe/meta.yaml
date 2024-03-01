@@ -1,4 +1,4 @@
-{% set version = "25.1.2" %}
+{% set version = "24.0.1" %}
 
 package:
   name: pyzmq
@@ -7,7 +7,7 @@ package:
 source:
   # We use the pypi URL as it includes the prepared Cython files.
   url: https://pypi.io/packages/source/p/pyzmq/pyzmq-{{ version }}.tar.gz
-  sha256: 93f1aa311e8bb912e34f004cf186407a4e90eec4f0ecc0efd26056bf7eda0226
+  sha256: 216f5d7dbb67166759e59b0479bca82b8acf9bed6015b526b8eb10143fb08e77
 
 build:
   number: 0
@@ -17,16 +17,13 @@ requirements:
   build:
     - pkg-config 0.29.2  # [not win]
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
   host:
     - python
     - packaging
     - pip
     - setuptools
-    - setuptools_scm
-    - toml
     - wheel
-    - cython >=0.29.35
+    - cython >=0.29.35,<3
     - zeromq 4.3.5
   run:
     - python
