@@ -47,9 +47,9 @@ about:
   summary: Python bindings for zeromq
   license: BSD-3-Clause AND LGPL-3.0-or-later
   license_file:
-     - LICENSE.BSD
-     - LICENSE.LESSER
-  license_family: BSD
+     - COPYING.BSD
+     - COPYING.LESSER
+  license_family: Other
   description: |
     PyZMQ contains Python bindings for 0MQ. 0MQ is a lightweight and fast
     messaging implementation.
