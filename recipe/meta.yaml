@@ -23,7 +23,7 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - cython >=0.29.35,<3
+    - cython >=0.29.35
     - zeromq 4.3.5
   run:
     - python
