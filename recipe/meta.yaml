@@ -13,11 +13,10 @@ source:
 build:
   number: 0
   skip: true  # [py<38]
-  ignore_run_exports:
-    - libcxx
+
 requirements:
   build:
-    # - {{ stdlib('c') }}
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake >=3.15
