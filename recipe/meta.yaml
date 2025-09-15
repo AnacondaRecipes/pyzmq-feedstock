@@ -37,7 +37,7 @@ requirements:
 
 {% set ignore_tests = "" %}
 # Random exception on win CI
-{% set ignore_tests = " --ignore=tests\test_zmqstream.py" %}  # [win]
+{% set ignore_tests = ignore_tests + " --ignore=tests\test_zmqstream.py" %}  # [win]
 # test_process_teardown: assert proc.exitcode == 0, f"Python process died with code {proc.exitcode}"
 {% set tests_to_skip = "test_show_builders" %}
 
