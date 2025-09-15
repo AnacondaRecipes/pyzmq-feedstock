@@ -1,4 +1,4 @@
-set PYZMQ_NO_BUNDLE=1   
+set PYZMQ_NO_BUNDLE=1
 set SKBUILD_CMAKE_VERBOSE=true
 
 %PYTHON% -m pip install --no-deps --no-build-isolation --config-settings="cmake.build-type=Release" -vv .
