@@ -36,13 +36,9 @@ requirements:
     - zeromq # constraint through run_exports
 
 {% set ignore_tests = "" %}
-{% set tests_to_skip = "" %}
 # CI issue: zmq.error.ZMQError: Socket operation on non-socket
 # Works fine locally on the Docker instance.
 {% set ignore_tests = ignore_tests + " --ignore=tests/test_log.py" %}  # [linux64]
-# E AssertionError: Python process died with code 1
-# E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
-{% set tests_to_skip = '-k "not test_process_teardown"' %}  # osx
 
 test:
   source_files:
@@ -77,7 +73,7 @@ test:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # Windows unit tests hanging without any reason.
-    - pytest tests {{ tests_to_skip }} {{ ignore_tests }}  # [not win]
+    - pytest tests {{ ignore_tests }}  # [not win]
 
 about:
   home: https://github.com/zeromq/pyzmq
