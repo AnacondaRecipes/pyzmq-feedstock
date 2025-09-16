@@ -37,7 +37,8 @@ requirements:
 
 {% set ignore_tests = "" %}
 {% set tests_to_skip = "" %}
-# zmq.error.ZMQError: Socket operation on non-socket
+# CI issue: zmq.error.ZMQError: Socket operation on non-socket
+# Works fine locally on the Docker instance.
 {% set ignore_tests = ignore_tests + " --ignore=tests/test_log.py" %}  # [linux64]
 # E AssertionError: Python process died with code 1
 # E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
