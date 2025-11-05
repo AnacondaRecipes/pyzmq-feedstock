@@ -1,9 +1,5 @@
 {% set version = "27.1.0" %}
 {% set name = "pyzmq" %}
-{% set ignore_tests = "" %}
-{% set ignore_tests = ignore_tests + " --ignore=tests/test_log.py" %}  # [linux64]
-{% set tests_to_skip = "" %}
-{% set tests_to_skip = '-k "not test_process_teardown"' %}  # [osx]
 
 package:
   name: {{ name|lower }}
@@ -39,10 +35,15 @@ requirements:
     - cffi  # [python_impl == 'pypy']
     - zeromq  # constraint through run_exports
 
+{% set ignore_tests = "" %}
+{% set tests_to_skip = "" %}
 # CI issue: zmq.error.ZMQError: Socket operation on non-socket
 # Works fine locally on the Docker instance.
+{% set ignore_tests = ignore_tests + " --ignore=tests/test_log.py" %}  # [linux64]
 # E AssertionError: Python process died with code 1
 # E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
+{% set tests_to_skip = '-k "not test_process_teardown"' %}  # [unix]
+
 test:
   source_files:
     - pyproject.toml
