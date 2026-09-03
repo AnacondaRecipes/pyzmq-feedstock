@@ -45,17 +45,8 @@ requirements:
 # E AssertionError: Python process died with code 1
 # E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
 {% set tests_to_skip = tests_to_skip + " --deselect=tests/test_asyncio.py::test_process_teardown" %}
-# Failing tests on Windows
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_socket.py::TestSocket::test_poll" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_socket.py::TestSocket::test_subscribe_method" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_context.py::TestContext::test_many_sockets" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_ssh.py::test_random_ports" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_poll.py::TestPollGreen::test_reqrep" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_poll.py::TestPoll::test_reqrep" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_monqueue.py::TestMonitoredQueue::test_router_router" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_monqueue.py::TestMonitoredQueue::test_prefix" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_monqueue.py::TestMonitoredQueue::test_monitor" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_device.py::TestDevice::test_single_socket_forwarder_bind" %}  # [win]
+# Hangs on Windows
+{% set tests_to_skip = tests_to_skip + " --ignore=tests/test_zmqstream.py" %}  # [win]
 
 test:
   source_files:
