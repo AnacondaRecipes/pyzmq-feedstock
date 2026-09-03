@@ -44,7 +44,7 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " --deselect=tests/test_curve_keygen.py::test_curve_keygen_secret" %}  # [linux64 and py>=314]
 # E AssertionError: Python process died with code 1
 # E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_asyncio.py::test_process_teardown" %}  # [linux64 and py>=314]
+{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_asyncio.py::test_process_teardown" %}
 
 test:
   source_files:
