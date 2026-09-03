@@ -76,8 +76,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    # Windows unit tests hanging without any reason.
-    - pytest tests {{ tests_to_skip }} {{ ignore_tests }}  # [not win]
+    - pytest tests {{ tests_to_skip }} {{ ignore_tests }}
 
 about:
   home: https://github.com/zeromq/pyzmq
