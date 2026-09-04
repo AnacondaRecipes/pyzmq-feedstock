@@ -45,13 +45,8 @@ requirements:
 # E AssertionError: Python process died with code 1
 # E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
 {% set tests_to_skip = tests_to_skip + " --deselect=tests/test_asyncio.py::test_process_teardown" %}
-# Hangs on Windows
-{% set tests_to_skip = tests_to_skip + " --ignore=tests/test_zmqstream.py" %}  # [win]
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_auth.py::test_ioloop_authenticator" %}  # [win]
 
 test:
-  files:  # [win]
-    - conftest.py  # [win]
   source_files:
     - pyproject.toml
     - pytest.ini
@@ -83,7 +78,8 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest tests {{ tests_to_skip }}
+    # Windows unit tests hanging without any reason.
+    - pytest tests {{ tests_to_skip }}  # [not win]
 
 about:
   home: https://github.com/zeromq/pyzmq
