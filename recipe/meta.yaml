@@ -49,6 +49,8 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " --ignore=tests/test_zmqstream.py" %}  # [win]
 
 test:
+  files:  # [win]
+    - win32_fix_event_loop.py  # [win]
   source_files:
     - pyproject.toml
     - pytest.ini
@@ -80,7 +82,8 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest tests {{ tests_to_skip }}
+    - pytest tests {{ tests_to_skip }}  # [not win]
+    - pytest tests -p win_fix_event_loop {{ tests_to_skip }}  # [win]
 
 about:
   home: https://github.com/zeromq/pyzmq
