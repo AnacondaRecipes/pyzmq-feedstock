@@ -50,7 +50,7 @@ requirements:
 
 test:
   files:  # [win]
-    - win_fix_event_loop.py  # [win]
+    - conftest.py  # [win]
   source_files:
     - pyproject.toml
     - pytest.ini
@@ -82,8 +82,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest tests {{ tests_to_skip }}  # [not win]
-    - pytest tests -p win_fix_event_loop {{ tests_to_skip }}  # [win]
+    - pytest tests {{ tests_to_skip }}
 
 about:
   home: https://github.com/zeromq/pyzmq
