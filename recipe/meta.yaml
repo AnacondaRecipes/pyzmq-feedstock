@@ -50,7 +50,7 @@ requirements:
 
 test:
   files:  # [win]
-    - win32_fix_event_loop.py  # [win]
+    - win_fix_event_loop.py  # [win]
   source_files:
     - pyproject.toml
     - pytest.ini
