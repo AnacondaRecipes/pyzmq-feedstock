@@ -1,5 +1,5 @@
-{% set version = "27.1.0" %}
 {% set name = "pyzmq" %}
+{% set version = "27.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,11 +8,11 @@ package:
 source:
   # We use the pypi URL as it includes the prepared Cython files.
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ac0765e3d44455adb6ddbf4417dcce460fc40a05978c08efdf2948072f6db540
+  sha256: 54d4259d1bfae24ecdb5ca79f7acc2eac6c286a02d6a0ae617797cb45f0726d3
 
 build:
-  number: 1
-  skip: true  # [py<38]
+  number: 0
+  skip: true  # [py<39]
 
 requirements:
   build:
@@ -26,7 +26,7 @@ requirements:
     - pip
     - python
     - cffi  # [python_impl == 'pypy']
-    - cython >=3.1.0  # [python_impl != 'pypy']
+    - cython >=3.0.0  # [python_impl != 'pypy']
     - packaging
     - scikit-build-core >=0.10
     - zeromq 4.3.5
@@ -35,14 +35,16 @@ requirements:
     - cffi  # [python_impl == 'pypy']
     - zeromq  # constraint through run_exports
 
-{% set ignore_tests = "" %}
 {% set tests_to_skip = "" %}
 # CI issue: zmq.error.ZMQError: Socket operation on non-socket
 # Works fine locally on the Docker instance.
-{% set ignore_tests = ignore_tests + " --ignore=tests/test_log.py" %}  # [linux64]
+{% set tests_to_skip = tests_to_skip + " --ignore=tests/test_log.py" %}  # [linux64]
+# Flaky test (fails more frequently on Linux-x64/py314, but occasionally fails on other combinations as well).
+# E subprocess.CalledProcessError: Command 
+{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_curve_keygen.py::test_curve_keygen_secret" %}
 # E AssertionError: Python process died with code 1
 # E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
-{% set tests_to_skip = '-k "not test_process_teardown"' %}  # [unix]
+{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_asyncio.py::test_process_teardown" %}
 
 test:
   source_files:
@@ -77,7 +79,7 @@ test:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # Windows unit tests hanging without any reason.
-    - pytest tests {{ tests_to_skip }} {{ ignore_tests }}  # [not win]
+    - pytest -vv tests {{ tests_to_skip }}  # [not win]
 
 about:
   home: https://github.com/zeromq/pyzmq
@@ -88,7 +90,7 @@ about:
   description: |
     PyZMQ contains Python bindings for 0MQ. 0MQ is a lightweight and fast
     messaging implementation.
-  doc_source_url: https://pyzmq.readthedocs.io
+  doc_url: https://pyzmq.readthedocs.io
   dev_url: https://github.com/zeromq/pyzmq
 
 extra:
