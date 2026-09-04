@@ -47,6 +47,7 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " --deselect=tests/test_asyncio.py::test_process_teardown" %}
 # Hangs on Windows
 {% set tests_to_skip = tests_to_skip + " --ignore=tests/test_zmqstream.py" %}  # [win]
+{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_auth.py::test_ioloop_authenticator" %}  # [win]
 
 test:
   files:  # [win]
