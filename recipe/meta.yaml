@@ -35,19 +35,19 @@ requirements:
     - cffi  # [python_impl == 'pypy']
     - zeromq  # constraint through run_exports
 
-{% set tests_to_skip = [] %}
+{% set tests_to_skip = "" %}
 # CI issue: zmq.error.ZMQError: Socket operation on non-socket
 # Works fine locally on the Docker instance.
-{% set tests_to_skip = tests_to_skip + ["--ignore=tests/test_log.py"] %}  # [linux64]
+{% set tests_to_skip = tests_to_skip + " --ignore=tests/test_log.py" %}  # [linux64]
 # Flaky on x64 Linux with Python 3.14
-# E subprocess.CalledProcessError: Command
-{% set tests_to_skip = tests_to_skip + ["--deselect=tests/test_curve_keygen.py::test_curve_keygen_secret"] %}  # [linux64 and py>=314]
+# E subprocess.CalledProcessError: Command 
+{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_curve_keygen.py::test_curve_keygen_secret" %}  # [linux64 and py>=314]
 # E AssertionError: Python process died with code 1
 # E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
-{% set tests_to_skip = tests_to_skip + ["--deselect=tests/test_asyncio.py::test_process_teardown"] %}
+{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_asyncio.py::test_process_teardown" %}
 # Hangs on Windows
-{% set tests_to_skip = tests_to_skip + ["--ignore=tests/test_zmqstream.py"] %}  # [win]
-{% set tests_to_skip = tests_to_skip + ["--deselect=tests/test_auth.py::test_ioloop_authenticator"] %}  # [win]
+{% set tests_to_skip = tests_to_skip + " --ignore=tests/test_zmqstream.py" %}  # [win]
+{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_auth.py::test_ioloop_authenticator" %}  # [win]
 
 test:
   files:  # [win]
@@ -83,8 +83,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest tests {{ tests_to_skip|join(' ') }}  # [not win]
-    - python -c "import sys, pytest, os; code = pytest.main(['tests', {{ "'" + tests_to_skip|join("', '") + "'" if tests_to_skip else "" }}]); os._exit(code)"  # [win]
+    - pytest tests {{ tests_to_skip }}
 
 about:
   home: https://github.com/zeromq/pyzmq
