@@ -39,9 +39,9 @@ requirements:
 # CI issue: zmq.error.ZMQError: Socket operation on non-socket
 # Works fine locally on the Docker instance.
 {% set tests_to_skip = tests_to_skip + " --ignore=tests/test_log.py" %}  # [linux64]
-# Flaky on x64 Linux with Python 3.14
+# Flaky test (fails more frequently on Linux-x64/py314, but occasionally fails on other combinations as well).
 # E subprocess.CalledProcessError: Command 
-{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_curve_keygen.py::test_curve_keygen_secret" %}  # [linux64 and py>=314]
+{% set tests_to_skip = tests_to_skip + " --deselect=tests/test_curve_keygen.py::test_curve_keygen_secret" %}
 # E AssertionError: Python process died with code 1
 # E where 1 = <ProcessForTeardownTest name='ProcessForTeardownTest-1' pid=74778 parent=74770 stopped exitcode=1>.exitcode
 {% set tests_to_skip = tests_to_skip + " --deselect=tests/test_asyncio.py::test_process_teardown" %}
