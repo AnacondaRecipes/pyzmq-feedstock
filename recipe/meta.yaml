@@ -80,7 +80,8 @@ test:
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # Windows unit tests hanging without any reason.
     - pytest -vv tests {{ tests_to_skip }}  # [not win]
-- python -m zmq.curve_keygen --help
+    - python -m zmq.curve_keygen --help
+
 about:
   home: https://github.com/zeromq/pyzmq
   summary: Python bindings for zeromq
